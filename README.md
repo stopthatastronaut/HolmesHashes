@@ -1,6 +1,6 @@
 # HolmesHashes - Elementary dummy hashes, my dear Watson
 
-I had a need to generate some "random" SHA hashes, for testing purposes - hashes that were in no way related to actual production data. I figured there were worse ways to do this than to use the copyright-free test of the Sherlock Holmes canon.
+I had a need to generate some "random" SHA hashes, for testing purposes - hashes that were in no way related to actual production data. I figured there were worse ways to do this than to use the copyright-free text of the Sherlock Holmes canon.
 
 Which led to me writing this Module. While doing so, I got to play with PowerShell dynamic parameters and some other little features.
 
@@ -14,4 +14,6 @@ The source text was obtained from [The Complete Sherlock Holmes Canon](https://s
 
 ```
 Install-Module HolmesHashes
+Import-Module HolmesHashes
+Get-HolmesHash -Book "The Hound of The Baskervilles" -Algorithm SHA1
 ```
