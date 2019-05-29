@@ -105,7 +105,7 @@ InModuleScope HolmesHashes {
 
         Context "With known hashes" {
             It "Should return the correct Hash" {
-                Get-HolmesHash -book "A Study In Scarlet" -Algorithm SHA1 | Select-Object -expand Hash | Should Be "896099EBB4176C703A9970CDB0BBEDCB9A2838EE"
+                Get-HolmesHash -book "A Study In Scarlet" -Algorithm SHA1 | Select-Object -expand Hash | Should Be "92AA4E3CB4D1F98D61EC854BA150A133A19E295F" # beware line breaks!
             }
         }
     }
