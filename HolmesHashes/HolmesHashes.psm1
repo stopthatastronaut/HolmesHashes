@@ -115,13 +115,12 @@ Function Get-BookFile
 
 Function Get-ModuleBase # are we loading from a module base, or as a script while not installed (as in testing)
 {
-    $installedModules =  Get-Module -ListAvailable HolmesHashes
-    $latest = $installedModules | Sort-Object Version -Descending | Select-Object -first 1
-    if($null -ne $latest.ModuleBase) {
-        return $latest.ModuleBase
+    $currentModule = Get-Module HolmesHashes | Select-Object -expand path
+    if($null -eq $currentModule) {
+        throw "Cannot detect holmesHashes loaded as a module. Please use Import-Module to import HolmesHashes into the current session (did you load this as a script?)"
     }
     else {
-        $modulePath = Split-Path $PSCommandPath -Parent
+        $modulePath = Split-Path $currentModule -Parent
         return $modulePath
     }
 }
