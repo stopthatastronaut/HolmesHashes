@@ -113,7 +113,7 @@ Function Get-BookFile
     return "$f\books\$bookfile"
 }
 
-Function Get-ModuleBase # are we loading from a module base, or as a script root?
+Function Get-ModuleBase # are we loading from a module base, or as a script while not installed (as in testing)
 {
     $installedModules =  Get-Module -ListAvailable HolmesHashes
     $latest = $installedModules | Sort-Object Version -Descending | Select-Object -first 1
@@ -121,7 +121,8 @@ Function Get-ModuleBase # are we loading from a module base, or as a script root
         return $latest.ModuleBase
     }
     else {
-        return $PSScriptRoot
+        $modulePath = Split-Path $PSCommandPath -Parent
+        return $modulePath
     }
 }
 
