@@ -109,6 +109,10 @@ Function Get-BookFile
     param($book)
     $index = Get-HolmesIndex
     $f = Get-ModuleBase
+    if($null -eq $f) # handle loading from file (as in tests)
+    {
+        $f = $PSScriptRoot
+    }
     $bookfile = $index | Where-Object { $_.Tome -eq $book } | Select-Object -expand File
     return "$f\books\$bookfile"
 }
