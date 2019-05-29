@@ -13,7 +13,12 @@ if (!(Test-Path -Path "$NuGetPath\nuget.exe")) {
 }
 
 # find the current published version
-$pver = [version](Find-Module HolmesHashes | Select-Object -expand version)
+try {
+    $pver = [version](Find-Module HolmesHashes | Select-Object -expand version)
+}
+catch {
+    $pver = [version]"0.0.0.0"
+}
 
 # find the current manifest version
 $mver = (Import-PowerShellDataFile .\HolmesHashes\HolmesHashes.psd1).ModuleVersion
