@@ -15,9 +15,7 @@ Function Get-HolmesHash
         $booksColl.Add($books)
 
         # where is this module? we need its index file
-        $installedModules =  Get-Module -ListAvailable HolmesHashes
-        $latest = $installedModules | Sort-Object Version -Descending | Select-Object -first 1
-        $f = $latest.ModuleBase
+        $f = Get-ModuleBase
         $indexfile = resolve-path "$f\index.json"
         $index = Get-Content $indexfile -raw | ConvertFrom-Json
 
