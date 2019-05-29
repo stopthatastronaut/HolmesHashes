@@ -109,19 +109,20 @@ Function Get-BookFile
     param($book)
     $index = Get-HolmesIndex
     $f = Get-ModuleBase
-    if($null -eq $f) # handle loading from file (as in tests)
-    {
-        $f = $PSScriptRoot
-    }
     $bookfile = $index | Where-Object { $_.Tome -eq $book } | Select-Object -expand File
     return "$f\books\$bookfile"
 }
 
-Function Get-ModuleBase
+Function Get-ModuleBase # are we loading from a module base, or as a script root?
 {
     $installedModules =  Get-Module -ListAvailable HolmesHashes
     $latest = $installedModules | Sort-Object Version -Descending | Select-Object -first 1
-    return $latest.ModuleBase
+    if($null -ne $latest.ModuleBase) {
+        return $latest.ModuleBase
+    }
+    else {
+        return $PSScriptRoot
+    }
 }
 
 Function Get-HolmesIndex
